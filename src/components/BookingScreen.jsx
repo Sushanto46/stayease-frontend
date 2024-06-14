@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { PacmanLoader } from 'react-spinners'
@@ -14,7 +14,7 @@ function BookingScreen() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [room, setRoom] = useState()
-
+    const navigate = useNavigate()
     const [from, setFrom] = useState(moment(fromdate, 'DD-MM-YYYY'))
     const [to, setTo] = useState(moment(todate, 'DD-MM-YYYY'))
     const totalDays = moment.duration(to.diff(from)).asDays() + 1
@@ -39,7 +39,7 @@ function BookingScreen() {
                 title: "Payment Successful!",
                 text: "Room booked successfully!",
                 icon: "success"
-            }).then(result => (window.location.href='/'));
+            }).then(result => (navigate('/')));
         } catch (error) {
             setLoading(false)
             setError(true)
@@ -50,7 +50,7 @@ function BookingScreen() {
     useEffect(() => {
         async function call() {
             if(!localStorage.getItem("currentUser"))
-                window.location.href = '/login'
+                navigate('/login')
             try {
                 const data = (await axios.post('https://stayease-ceb8.onrender.com/api/v1/getRoomById', { roomid: roomid })).data
                 console.log(data);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 import { PacmanLoader } from 'react-spinners';
@@ -13,7 +13,7 @@ function Login() {
   const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState(false)
-
+    const navigate = useNavigate()
   async function handleSubmit(e){
     e.preventDefault();
 
@@ -25,7 +25,7 @@ function Login() {
       setSuccess(true)
       console.log("Current User: ",response);
       localStorage.setItem("currentUser", JSON.stringify(response))
-      window.location.href='/'
+      navigate('/')
 
     } catch (error) {
       console.error('Login failed:', error);

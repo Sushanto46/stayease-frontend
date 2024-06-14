@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { PacmanLoader } from 'react-spinners';
@@ -6,6 +7,7 @@ import Error from './Error';
 import Success from './Success';
 
 function Register() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({name: '', email: '', password: '', repeatPassword: ''})
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
@@ -20,7 +22,8 @@ function Register() {
                 setLoading(false)
                 setSuccess(true)
 
-                window.location.href='/login'
+                // window.location.href='/login'
+                navigate('/login')
 
                 // console.log(result);
             } catch (err) {

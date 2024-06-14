@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { Tabs } from "antd";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserBookings from './UserBookings';
 const {TabPane} = Tabs 
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem("currentUser"))
-
+  const navigate = useNavigate()
   useEffect(()=>{
     if(!user)
-      window.location.href = '/login'
+      navigate('/login')
   }, [])
   return (
     <div className='px-10 py-1'>

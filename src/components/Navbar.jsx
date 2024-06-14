@@ -1,16 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 function Navbar() {
 
     const user = JSON.parse(localStorage.getItem("currentUser"))
     const [isClicked, setIsClicked] = useState(false)
+    const navigate = useNavigate()
     function handleClick() {
         setIsClicked(!isClicked)
     }
     function logout(){
         localStorage.removeItem("currentUser")
-        window.location.href = '/login'
+        navigate('/login')
     }
     return (
         <nav className="bg-gray-800 w-full">

@@ -5,13 +5,14 @@ const { TabPane } = Tabs
 import moment from 'moment';
 import { PacmanLoader } from 'react-spinners';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 function AdminPanel() {
-
+    const navigate = useNavigate()
     useEffect(() => {
         // console.log(JSON.parse(localStorage.getItem('currentUser')));
         if (!JSON.parse(localStorage.getItem('currentUser')).user.isAdmin)
-            window.location.href = '/'
+            navigate('/')
     }, [])
 
     return (
